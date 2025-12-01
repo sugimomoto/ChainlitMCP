@@ -2,6 +2,9 @@
 
 ChainlitフレームワークとClaude APIを使用したAIアシスタントアプリケーションです。
 Model Control Protocol (MCP)をサポートし、外部ツールとの統合が可能です。
+今回はCData Connect AI との接続を例に紹介します。
+
+https://jp.cdata.com/ai/
 
 ## セットアップ
 
@@ -41,11 +44,6 @@ pip install -r requirements.txt
 ```bash
 # Claude API Key
 ANTHROPIC_API_KEY=your-api-key-here
-
-# CData MCP Server Configuration (オプション)
-CDATA_MCP_URL=https://mcp.cloud.cdata.com/mcp/
-CDATA_MCP_USERNAME=your-email@example.com
-CDATA_MCP_API_KEY=your-cdata-api-key
 ```
 
 ## 実行方法
@@ -67,13 +65,12 @@ chainlit run app.py -w
 3. 接続情報を入力:
    - **Connection Name**: 任意の名前（例: `cdata-tools`）
    - **Type**: `sse` または `streamable-http` を選択
-   - **URL**: CData MCP サーバーのURL（例: `https://mcp.cloud.cdata.com/mcp/`）
+   - **URL**: CData MCP サーバーのURL（`https://mcp.cloud.cdata.com/mcp/`）
    - **Headers**: 認証情報を追加
      ```json
      {
-       "X-Username": "your-email@example.com",
-       "X-API-Key": "your-cdata-api-key"
-     }
+       "authorization": "Basic XXXXXXX"
+      }
      ```
 
 ### 使用例
@@ -83,8 +80,8 @@ MCP接続を追加すると、Claudeは自動的に利用可能なツールを�
 例えば、CData MCPサーバーに接続している場合:
 
 ```
-ユーザー: "Salesforceのアカウント情報を取得してください"
-Claude: [CData MCPツールを使用してSalesforceにアクセス]
+ユーザー: "CDataConnectAI を使ってSalesforceの顧客情報を取得してください"
+Claude: [CDataConnectAIツールを使用してSalesforceにアクセス。顧客情報一覧を表示]
 ```
 
 ## 機能
